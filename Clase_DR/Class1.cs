@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace Clase_DR
             "Cuadro", "Espejo", "Reloj de pared", "Lámpara", "Cortina",
             "Biblia", "Libro de cocina", "Diccionario", "Enciclopedia", "Novela",
         };
-        string[] Articulos;
+        string[] articulos;
         int[,] Ventas;
         int[,] TotalArticulo;
         int[,] VentaMinima;
@@ -43,13 +44,63 @@ namespace Clase_DR
         {
             Console.Write("Ingrese la cantidad de artículos: ");
             int cantidad = int.Parse(Console.ReadLine());
-            Articulos = new string[cantidad];
+            articulos = new string[cantidad];
             for (int i = 0; i < cantidad; i++)
             {
                 int numero = r.Next(dic_articulos.Length);
-                Articulos[i] = dic_articulos[numero];
+                articulos[i] = dic_articulos[numero];
                 Thread.Sleep(20);
             }
+        }
+        public void GenerarVentasSemana()
+        {
+            Ventas = new int[articulos.Length, 7];
+            TotalArticulo = new int[articulos.Length];
+            VentaMinima = new int[articulos.Length];
+            VentaMaxima = new int[articulos.Length];
+            Promedio = new double[articulos.Length];
+            SumaPorDia = new int[7];
+
+            for (int i = 0; i < articulos.Length; i++)
+            {
+                VentaMinima[i] = int.MaxValue;
+                VentaMaxima[i] = int.MinValue;
+                int suma = 0;
+
+                for (int j = 0; j < 7; j++)
+                {
+                    int cantidadVendida = r.Next(0, 21); // aleatorio entre 0 y 20
+                    Ventas[i, j] = cantidadVendida;
+                    suma += cantidadVendida;
+                    SumaPorDia[j] += cantidadVendida;
+
+                    if (cantidadVendida < VentaMinima[i])
+                        VentaMinima[i] = cantidadVendida;
+                    if (cantidadVendida > VentaMaxima[i])
+                        VentaMaxima[i] = cantidadVendida;
+                }
+
+                TotalArticulo[i] = suma;
+                Promedio[i] = Math.Round(suma / 7.0, 1);
+            }
+        }
+
+        public void MostrarRegistro()
+        {
+            string[] dias = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.Write("Articulo\t");
+            Console.Write(dias[0] + "\t");
+            Console.Write(dias[1] + "\t");
+            Console.Write(dias[2] + "\t");
+            Console.Write(dias[3] + "\t");
+            Console.Write(dias[4] + "\t");
+            Console.Write(dias[5] + "\t");
+            Console.Write(dias[6] + "\t");
+            Console.Write("Total\tMin\tMax\tProm");
+            Console.ResetColor();
+            Console.WriteLine();
         }
     }
 }
