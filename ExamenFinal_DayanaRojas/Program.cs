@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Clase_DR;
 
 namespace ExamenFinal_DayanaRojas
 {
@@ -10,7 +12,7 @@ namespace ExamenFinal_DayanaRojas
     {
         static void Main(string[] args)
         {
-            Ventas = new VentasArticulos();
+            Class1 Ventas = new Class1();
             Ventas.GenerarArticulos();
             Ventas.GenerarVentasSemana();
             Ventas.MostrarRegistro();

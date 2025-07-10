@@ -18,10 +18,10 @@ namespace Clase_DR
             "Juguete", "Ropa", "Zapatos", "Perfume", "Jabon",
             "Champu", "Acondicionador", "Colinos", "Desodorante", "Maquillaje",
             "Pegamento", "Floder", "Calculadora", "Regla", "Marcador",
-            "Cinta adhesiva", "Grapadora", "Tijeras", "Papel higienico", "Toallas de papel",
+            "Cinta", "Grapadora", "Tijeras", "Papel higienico", "Toallas",
             "Escuadra", "Transportador", "Pincel", "Paletas", "Lienzo",
             "Cartuchera", "Agenda", "Calendario", "Organizador", "Bolsa de Tela",
-            "Caja de herramientas", "Taladro", "Destornillador", "Martillo", "Sierra",
+            "Herramientas", "Taladro", "Destornillador", "Martillo", "Sierra",
             "Batidora", "Tostadora", "Microondas", "Horno", "Refrigerador",
             "Tomatodo", "Termo", "Bidon", "Exprimidor", "Licuadora",
             "Cuchillo de cocina", "Tabla de cortar", "Colador", "Rallador", "Abrelatas",
@@ -31,11 +31,12 @@ namespace Clase_DR
             "Cuadro", "Espejo", "Reloj de pared", "Lámpara", "Cortina",
             "Biblia", "Libro de cocina", "Diccionario", "Enciclopedia", "Novela",
         };
+
         string[] articulos;
         int[,] Ventas;
-        int[,] TotalArticulo;
-        int[,] VentaMinima;
-        int[,] VentaMaxima;
+        int[] TotalArticulo;
+        int[] VentaMinima;
+        int[] VentaMaxima;
         double[] Promedio;
         int[] SumaPorDia;
         Random r = new Random();
@@ -69,7 +70,7 @@ namespace Clase_DR
 
                 for (int j = 0; j < 7; j++)
                 {
-                    int cantidadVendida = r.Next(0, 21); // aleatorio entre 0 y 20
+                    int cantidadVendida = r.Next(0, 21);
                     Ventas[i, j] = cantidadVendida;
                     suma += cantidadVendida;
                     SumaPorDia[j] += cantidadVendida;
@@ -84,10 +85,9 @@ namespace Clase_DR
                 Promedio[i] = Math.Round(suma / 7.0, 1);
             }
         }
-
         public void MostrarRegistro()
         {
-            string[] dias = { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
+            string[] dias = {"Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo" };
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Articulo\t");
@@ -98,21 +98,19 @@ namespace Clase_DR
             Console.Write("Total\tMin\tMax\tPromedio");
             Console.ResetColor();
             Console.WriteLine();
-
-            for (int i = 0; i < dias.Length; i++)
+            for (int i = 0; i < articulos.Length; i++)
             {
-                Console.WriteLine(articulos[i] + "\t\t");
+                Console.Write(articulos[i] + "\t");
                 for (int j = 0; j < 7; j++)
                 {
-                    Console.Write(Ventas[i, j] + "\t");
+                    Console.Write(Ventas[i, j] +  "\t");
                 }
-                Console.Write(TotalArticulo[i] + "\t");
+                Console.Write(TotalArticulo[i] +  "\t");
                 Console.Write(VentaMinima[i] + "\t");
                 Console.Write(VentaMaxima[i] + "\t");
                 Console.Write(Promedio[i] + "\t");
                 Console.WriteLine();
             }
-
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.Write("Total por día\t");
             for (int j = 0; j < 7; j++)
