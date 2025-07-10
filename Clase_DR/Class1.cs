@@ -91,14 +91,34 @@ namespace Clase_DR
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.Write("Articulo\t");
-            Console.Write(dias[0] + "\t");
-            Console.Write(dias[1] + "\t");
-            Console.Write(dias[2] + "\t");
-            Console.Write(dias[3] + "\t");
-            Console.Write(dias[4] + "\t");
-            Console.Write(dias[5] + "\t");
-            Console.Write(dias[6] + "\t");
-            Console.Write("Total\tMin\tMax\tProm");
+            for (int d = 0; d < dias.Length; d++)
+            {
+                Console.Write(dias[d] + "\t");
+            }
+            Console.Write("Total\tMin\tMax\tPromedio");
+            Console.ResetColor();
+            Console.WriteLine();
+
+            for (int i = 0; i < dias.Length; i++)
+            {
+                Console.WriteLine(articulos[i] + "\t\t");
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write(Ventas[i, j] + "\t");
+                }
+                Console.Write(TotalArticulo[i] + "\t");
+                Console.Write(VentaMinima[i] + "\t");
+                Console.Write(VentaMaxima[i] + "\t");
+                Console.Write(Promedio[i] + "\t");
+                Console.WriteLine();
+            }
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("Total por día\t");
+            for (int j = 0; j < 7; j++)
+            {
+                Console.Write(SumaPorDia[j] + "\t");
+            }
             Console.ResetColor();
             Console.WriteLine();
         }

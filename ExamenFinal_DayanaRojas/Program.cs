@@ -10,6 +10,14 @@ namespace ExamenFinal_DayanaRojas
     {
         static void Main(string[] args)
         {
+            Ventas = new VentasArticulos();
+            Ventas.GenerarArticulos();
+            Ventas.GenerarVentasSemana();
+            Ventas.MostrarRegistro();
+
+            Console.WriteLine("\nPresione cualquier tecla para salir...");
+            Console.ReadKey();
+
         }
     }
 }
